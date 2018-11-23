@@ -3,10 +3,7 @@ class Database
 {
   
 
-    // private $host = "localhost";
-    // private $db_name = "pawulon1_mini";
-    // private $user_name = "pawulon1_mini";
-    // private $password = "Abzdohc12#";
+   
 
     private $host = "localhost";
     private $db_name = "pawulon1_mini";

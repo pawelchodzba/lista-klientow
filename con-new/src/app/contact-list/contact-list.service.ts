@@ -19,34 +19,34 @@ export class ContactListService {
  constructor(private http: Http ) { }
 
   addPerson(person: Person): void {
-    // const phpUrl = 'http://localhost/connect_list/back-end/create.php';
-   const phpUrl = '../back-end/create.php';
+     const phpUrl = 'http://localhost/connect_list/back-end/create.php';
+   // const phpUrl = '../back-end/create.php';
     this.http.post(phpUrl, person, this.options)
       .subscribe((data) => {this.reLoadTab();
     });
   }
   read(): Observable<Person[]> {
-        // const phpUrl = 'http://localhost/connect_list/back-end/read.php';
-        const phpUrl = '../back-end/read.php';
+        const phpUrl = 'http://localhost/connect_list/back-end/read.php';
+        // const phpUrl = '../back-end/read.php';
     return this.http.get(phpUrl)
     .pipe(map((res: Response) => res.json())) ;
   }
   getPerson(id: string): Observable<Person> {
-   //  const phpUrl = 'http://localhost/connect_list/back-end/read_one.php?id=' + id;
-    const phpUrl = '../../../back-end/read_one.php?id=' + id;
+    const phpUrl = 'http://localhost/connect_list/back-end/read_one.php?id=' + id;
+    // const phpUrl = '../../../back-end/read_one.php?id=' + id;
     return this.http.get(phpUrl)
       .pipe(map((res: Response) => res.json()));
   }
   upDataPerson(person): void {
-    // const phpUrl = 'http://localhost/connect_list/back-end/update.php';
-    const phpUrl = '../../../../clientlist/back-end/update.php';
+    const phpUrl = 'http://localhost/connect_list/back-end/update.php';
+    // const phpUrl = '../../../../clientlist/back-end/update.php';
     this.http.post(phpUrl, person, this.options).subscribe((data) => {
       this.reLoadTab();
     });
   }
   deletePerson(personId): void {
-    // const phpUrl = 'http://localhost/connect_list/back-end/delete.php';
-    const phpUrl = '../back-end/delete.php';
+    const phpUrl = 'http://localhost/connect_list/back-end/delete.php';
+    // const phpUrl = '../back-end/delete.php';
     this.http.post(phpUrl, {id: personId}, this.options).subscribe((data) => {
       this.reLoadTab();
     });
