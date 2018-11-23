@@ -105,7 +105,25 @@ Class Clients
     }
         
         
+    public function arrClient()           
+    {
+        return[
+            "id" => $this->id,
+            "alias" => $this->alias,
+            "first_name" => $this->first_name,
+            "last_name" => $this->last_name,
+            "email" => $this->email,
+            "telephon" => $this->telephon,
+            "sex" => $this->sex 
+        ];
         
+    }
+    public function message($arr)
+    {
+       return print_r(json_encode($arr)); 
+    }
+        
+          
 
         
      
