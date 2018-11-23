@@ -12,7 +12,7 @@ Class Clients
     public $telephon;
     public $sex;
 
-    public function __construct($db)
+    public function __construct(PDO $db)
     {
         $this->connection = $db;
     }
@@ -21,7 +21,6 @@ Class Clients
        $sql = "SELECT * FROM " . $this->tab_name . " ORDER BY id DESC";
        $stmp =  $this->connection->prepare($sql);
        $stmp->execute();
-      // print_r($stmp);
        return $stmp; 
     }
     public function create()
@@ -47,7 +46,7 @@ Class Clients
         if ($stmt->execute()) {
             return true;
         }
-    return false;
+        return false;
     }
     public function readOne()
     {
@@ -55,15 +54,7 @@ Class Clients
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(1,$this->id);
         $stmt->execute();
-
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $this->alias = $row['alias'];
-        $this->first_name = $row['first_name'];
-        $this->last_name = $row['last_name'];
-        $this->email = $row['email'];
-        $this->telephon = $row['telephon'];
-        $this->sex = $row['sex'];
-      
+        return  $row = $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function update()
     {

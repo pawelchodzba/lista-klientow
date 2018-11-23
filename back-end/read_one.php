@@ -8,27 +8,18 @@ header('Content-Type: application/json');
 include_once 'database.php';
 include_once 'clients.php';
 
+class ReadOne extends Clients
+{
+    public function setResult()
+    {
+        return $this->setId() ?  $this->message($this->readOne()) : $this->message(["message"=>"client's id is false"]);
+    }
+    private function setId()
+    {
+        return  $this->id = isset($_GET['id']) ? $_GET['id'] : null;
+    }
+}
 $database = new Database();
 $db = $database->getConnection();
-
-$client = new Clients($db);
-
-$client->id = isset($_GET['id']) ? $_GET['id'] : die();
-
-$client->readOne();
-
-if ($client->alias !=null) {
-    $client_arr = array(
-        "alias"=> $client->alias,
-        "first_name"=> $client->first_name,
-        "last_name"=> $client->last_name,
-        "email"=> $client->email,
-        "telephon"=> $client->telephon,
-        "sex"=> $client->sex
-    );
-    http_response_code(200);
-    echo json_encode($client_arr);
-}else{
-    http_response_code(404);
-    echo json_encode(array("message"=>"Client does not exist"));
-}
+$one = new ReadOne($db); 
+$one->setResult();
