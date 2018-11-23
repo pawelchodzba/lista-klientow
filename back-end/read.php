@@ -20,12 +20,12 @@ class Read extends Clients
           
     public function setResult()
     {
-           $arrResult=[]; 
+           $arrResult['records']=[]; 
         if ($stmt = $this->checkAmountRow()) {
             $keys = array_keys($this->arrClient());
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 extract($row);        
-                array_push($arrResult, compact($keys));
+                array_push($arrResult['records'], compact($keys));
             }
         }else{
             $arrResult = $this->message(["message"=>"nomber of rows is null"]);
@@ -50,10 +50,6 @@ $name->setResult();
 
 
 //$num = $stmt->rowCount();
-
-
-
-
 
 // if ($num>0) {
 //     $clients_arr = array();
