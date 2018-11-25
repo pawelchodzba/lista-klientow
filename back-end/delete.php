@@ -9,20 +9,21 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include_once 'database.php';
 include_once 'clients.php';
+include_once("save/chengeInput.php");
 
+ class Delete extends Clients
+ {
+    public function del($Input)
+    {
+        $inObj = file_get_contents('php://input');
+        $json = json_decode($inObj);
+        $this->id = $json->id;
+        $this->delete();
+    }
+         
+ }
 $database = new Database();
 $db = $database->getConnection();
-
-$client = new Clients($db);
-
-$data  = json_decode(file_get_contents("php://input"));
-
-$client->id = $data->id;
-
-if ($client->delete()) {
-    http_response_code(200);
-    echo json_encode(array("message"=>"data client's was deleted"));
-}else{
-    http_response_code(503);
-    echo json_encode(array("message"=>"Unable to delete"));
-}
+$del = new Delete($db); 
+$input = new chengeInput();
+$del->del($input);

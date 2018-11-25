@@ -11,7 +11,7 @@ Class Clients
     public $email;
     public $telephon;
     public $sex;
-
+  
     public function __construct(PDO $db)
     {
         $this->connection = $db;
@@ -25,17 +25,9 @@ Class Clients
     }
     public function create()
     {
-     
         $sql = "INSERT INTO " . $this->tab_name. " SET alias=:alias, first_name=:first_name, last_name=:last_name, email=:email, telephon=:telephon, sex=:sex";
         $stmt = $this->connection->prepare($sql);
         
-        $this->alias = htmlspecialchars(strip_tags($this->alias));
-        $this->first_name = htmlspecialchars(strip_tags($this->first_name));
-        $this->last_name = htmlspecialchars(strip_tags($this->last_name));
-        $this->email = htmlspecialchars(strip_tags($this->email));
-        $this->telephon = htmlspecialchars(strip_tags($this->telephon));
-        $this->sex = htmlspecialchars(strip_tags($this->sex));
-
         $stmt->bindParam(":alias", $this->alias);
         $stmt->bindParam(":first_name", $this->first_name);
         $stmt->bindParam(":last_name", $this->last_name);
@@ -58,15 +50,8 @@ Class Clients
     }
     public function update()
     {
+       
         $sql = "UPDATE ".$this->tab_name. " SET alias=:alias, first_name=:first_name, last_name=:last_name, email=:email, telephon=:telephon, sex=:sex WHERE id=:id";
-
-        $this->alias = htmlspecialchars(strip_tags($this->alias));
-        $this->first_name = htmlspecialchars(strip_tags($this->first_name));
-        $this->last_name = htmlspecialchars(strip_tags($this->last_name));
-        $this->email = htmlspecialchars(strip_tags($this->email));
-        $this->telephon = htmlspecialchars(strip_tags($this->telephon));
-        $this->sex = htmlspecialchars(strip_tags($this->sex));
-        $this->id = htmlspecialchars(strip_tags($this->id));
 
         $stmt = $this->connection->prepare($sql);
 
@@ -99,23 +84,33 @@ Class Clients
     public function arrClient()           
     {
         return[
-            "id" => $this->id,
-            "alias" => $this->alias,
-            "first_name" => $this->first_name,
-            "last_name" => $this->last_name,
-            "email" => $this->email,
-            "telephon" => $this->telephon,
-            "sex" => $this->sex 
+            "id" => 'id',
+            "alias" => 'alias',
+            "first_name" => 'first_name',
+            "last_name" => 'last_name',
+            "email" => 'email',
+            "telephon" => 'telephon',
+            "sex" => 'sex' 
         ];
         
     }
-    public function message($arr)
+    public function message($arr,$statusCode)
     {
+        http_response_code($statusCode); 
        return print_r(json_encode($arr)); 
     }
+    public function setValueProperties($arrayAssoc)
+    {
+        foreach ($arrayAssoc as $key => $value) {
+            if (in_array($key,array_keys($this->arrClient()))) {
+                $this->{$key} = $value;
+            }
+        }
+      
+    }
+    public function sanitization($valueProperty)
+    {
+        return  htmlspecialchars(strip_tags($valueProperty));
+    }
         
-          
-
-        
-     
 }

@@ -25,4 +25,3 @@ class Database
 
         
 }
-//$a = new Database();$a->getConnection();

@@ -12,7 +12,7 @@ class ReadOne extends Clients
 {
     public function setResult()
     {
-        return $this->setId() ?  $this->message($this->readOne()) : $this->message(["message"=>"client's id is false"]);
+        return $this->setId() ?  $this->message($this->readOne(), '200') : $this->message(["message"=>"client's id is false"], '404');
     }
     private function setId()
     {

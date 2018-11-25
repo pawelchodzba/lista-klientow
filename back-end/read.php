@@ -13,7 +13,7 @@ class Read extends Clients
     }
     public function setResult()
     {
-           $arrResult['records']=[]; 
+        $arrResult['records']=[]; 
         if ($stmt = $this->checkAmountRow()) {
             $keys = array_keys($this->arrClient());
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -21,10 +21,9 @@ class Read extends Clients
                 array_push($arrResult['records'], compact($keys));
             }
         }else{
-            $arrResult = $this->message(["message"=>"nomber of rows is null"]);
+            $arrResult = $this->message(["message"=>"nomber of rows is null","400"]);
         }
-        
-        return $this->message($arrResult);
+        return $this->message($arrResult, '200');
     }
 }
 $database = new Database();

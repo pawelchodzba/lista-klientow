@@ -7,27 +7,27 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 include_once 'database.php';
 include_once 'clients.php';
+include_once "save/chengeInput.php";
+include_once "save/iteratioInpObj.php";
+
+class Updata extends Clients          
+{
+    public function fowardData($Input, $Iteratio)
+    {
+        $inpArr =  $Input->readInput('php://input',$this->arrClient());
+        if (isset($inpArr['id'])) {
+            $arr = $Iteratio->iteratio($inpArr, $this);
+            $this->setValueProperties($arr);
+            return ($this->update()) ? $this->message(["message" => "client was update"],'201') : $this->message(["message" => "Unable to updata client", '503']);
+        }else{
+            $this->message(["message" => "client must have id"],'400');
+       }
+    }
+}
 
 $database = new Database();
 $db = $database->getConnection();
-
-$client = new Clients($db);
-
-$data  = json_decode(file_get_contents("php://input"));
-
-$client->id = $data->id;
-
-$client->alias = $data->alias;
-$client->first_name = $data->first_name;
-$client->last_name = $data->last_name;
-$client->email = $data->email;
-$client->telephon = $data->telephon;
-$client->sex = $data->sex;
-
-if ($client->update()) {
-    http_response_code(200);
-    echo json_encode(array("message"=>"Data client was updated"));
-}else{
-    http_response_code(503);
-    echo json_encode(array("message"=>"Unable to update"));
-}
+$updata = new Updata($db); 
+$input = new chengeInput();
+$iteratio = new IteratioInpObj(); 
+$updata->fowardData($input, $iteratio);
