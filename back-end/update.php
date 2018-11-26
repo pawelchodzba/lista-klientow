@@ -15,7 +15,7 @@ class Updata extends Clients
     public function fowardData($Input, $Iteratio)
     {
         $inpObj =  $Input->readInput('php://input');
-        $inpArr =  $Input->setVars($this->arrClient(),$inpObj);
+        $inpArr =  $Input->setVars($this->keyProperties(),$inpObj);
         if (isset($inpArr['id'])) {
             $arr = $Iteratio->iteratio($inpArr, $this);
             $this->setValueProperties($arr);

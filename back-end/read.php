@@ -15,7 +15,7 @@ class Read extends Clients
     {
         $arrResult['records']=[]; 
         if ($stmt = $this->checkAmountRow()) {
-            $keys = array_keys($this->arrClient());
+            $keys = $this->keyProperties();
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 extract($row);        
                 array_push($arrResult['records'], compact($keys));

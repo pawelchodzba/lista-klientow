@@ -79,30 +79,19 @@ Class Clients
         }
         return false;
     }
-        
-        
-    public function arrClient()           
+    public function keyProperties()           
     {
-        return[
-            "id" => 'id',
-            "alias" => 'alias',
-            "first_name" => 'first_name',
-            "last_name" => 'last_name',
-            "email" => 'email',
-            "telephon" => 'telephon',
-            "sex" => 'sex' 
-        ];
-        
+        return array_keys(get_object_vars($this));
     }
     public function message($arr,$statusCode)
     {
         http_response_code($statusCode); 
-       return print_r(json_encode($arr)); 
+        return print_r(json_encode($arr)); 
     }
     public function setValueProperties($arrayAssoc)
     {
         foreach ($arrayAssoc as $key => $value) {
-            if (in_array($key,array_keys($this->arrClient()))) {
+            if (in_array($key,$this->keyProperties())) {
                 $this->{$key} = $value;
             }
         }

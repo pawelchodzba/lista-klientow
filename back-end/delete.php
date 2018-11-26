@@ -15,10 +15,9 @@ include_once("save/chengeInput.php");
  {
     public function del($Input)
     {
-        // $inObj = file_get_contents('php://input');
-        // $json = json_decode($inObj);
-       $json = $Input->readInput('php://input');
-        $this->id = $json->id;
+       
+        $json = $Input->readInput('php://input');
+        $this->id = $this->sanitization($json->id);
         $this->delete();
     }
          

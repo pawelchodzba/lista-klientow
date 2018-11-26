@@ -4,7 +4,7 @@ class chengeInput
     public function readInput($input)
     {
         $inObj = file_get_contents($input);
-       return json_decode($inObj);
+        return json_decode($inObj);
 
         
     }
@@ -12,7 +12,7 @@ class chengeInput
     {
         $vars = get_object_vars($obj);
         extract($vars);
-        return compact(array_keys($keys));
+        return compact($keys);
     }
         
    
