@@ -17,7 +17,8 @@ class Create extends Clients
 {
     public function fowardData($Input, $Iteratio)
     { 
-        $inpArr =  $Input->readInput('php://input',$this->arrClient());
+        $inpObj =  $Input->readInput('php://input');
+        $inpArr =  $Input->setVars($this->arrClient(),$inpObj);
         $arr = $Iteratio->iteratio($inpArr, $this);
         $this->setValueProperties($arr);
         return ($this->create()) ? $this->message(["message" => "client was added"],'201') : $this->message(["message" => "Unable to add client", '503']) ;
