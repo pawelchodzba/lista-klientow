@@ -19,7 +19,9 @@ class Updata extends Clients
         if (isset($inpArr['id'])) {
             $arr = $Iteratio->iteratio($inpArr, $this);
             $this->setValueProperties($arr);
-            return ($this->update()) ? $this->message(["message" => "client was update"],'201') : $this->message(["message" => "Unable to updata client", '503']);
+            $stmt = $this->update();
+            $this->bindResult($stmt, array_keys($arr));
+            $this->exe($stmt) ? $this->message(["message" => "client was update"],'201') : $this->message(["message" => "Unable to updata client"], '503');
         }else{
             $this->message(["message" => "client must have id"],'400');
        }

@@ -11,6 +11,8 @@ Class Clients
     public $email;
     public $telephon;
     public $sex;
+    
+    private $arrInput;
   
     public function __construct(PDO $db)
     {
@@ -26,19 +28,8 @@ Class Clients
     public function create()
     {
         $sql = "INSERT INTO " . $this->tab_name. " SET alias=:alias, first_name=:first_name, last_name=:last_name, email=:email, telephon=:telephon, sex=:sex";
-        $stmt = $this->connection->prepare($sql);
-        
-        $stmt->bindParam(":alias", $this->alias);
-        $stmt->bindParam(":first_name", $this->first_name);
-        $stmt->bindParam(":last_name", $this->last_name);
-        $stmt->bindParam(":email", $this->email);
-        $stmt->bindParam(":telephon", $this->telephon);
-        $stmt->bindParam(":sex", $this->sex);
-       
-        if ($stmt->execute()) {
-            return true;
-        }
-        return false;
+        return $this->connection->prepare($sql);
+ 
     }
     public function readOne()
     {
@@ -49,35 +40,17 @@ Class Clients
         return  $row = $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function update()
-    {
-       
+    {   
         $sql = "UPDATE ".$this->tab_name. " SET alias=:alias, first_name=:first_name, last_name=:last_name, email=:email, telephon=:telephon, sex=:sex WHERE id=:id";
-
-        $stmt = $this->connection->prepare($sql);
-
-        $stmt->bindParam(":alias", $this->alias);
-        $stmt->bindParam(":first_name", $this->first_name);
-        $stmt->bindParam(":last_name", $this->last_name);
-        $stmt->bindParam(":email", $this->email);
-        $stmt->bindParam(":telephon", $this->telephon);
-        $stmt->bindParam(":sex", $this->sex);
-        $stmt->bindParam(":id", $this->id);
-
-        if($stmt->execute()){
-            return true;
-        }
-    return false;    
+        return $this->connection->prepare($sql);
     }
     public function delete()
     {
         $sql = "DELETE FROM ".$this->tab_name." WHERE id = ?";
         $stmt = $this->connection->prepare($sql);
-        $this->id = htmlspecialchars(strip_tags($this->id));
         $stmt->bindParam(1, $this->id);
-        if ($stmt->execute()) {
-            return true;
-        }
-        return false;
+        return $this->exe($stmt) ? true : null;
+   
     }
     public function keyProperties()           
     {
@@ -90,12 +63,22 @@ Class Clients
     }
     public function setValueProperties($arrayAssoc)
     {
+        $keys = $this->keyProperties();
         foreach ($arrayAssoc as $key => $value) {
-            if (in_array($key,$this->keyProperties())) {
+            if (in_array($key,$keys)) {
                 $this->{$key} = $value;
             }
         }
-      
+    }
+    public function bindResult($stmt,$keyArrayInp)
+    {
+        foreach ($keyArrayInp as $key) {
+            $stmt->bindParam(":".$key, $this->{$key});
+        } 
+    }
+    public function exe($stmt)
+    {
+        return $stmt->execute();
     }
     public function sanitization($valueProperty)
     {
