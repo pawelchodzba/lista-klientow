@@ -21,15 +21,16 @@
     <div class="col-sm-4">
       <mat-form-field>
         <input matInput formControlName="last_name" placeholder="nazwisko">
-        <mat-error *ngIf="form.get('last_name').hasError('required')">pole jest wymagane</mat-error>
+        <mat-error *ngIf = "form.get('last_name').hasError('required')">pole jest wymagane</mat-error>
         <mat-error *ngIf = "!form.get('last_name').hasError('required')">pole nie może mieć więcej niż 24 znaki</mat-error>
       </mat-form-field>
     </div>
     <div class="col-sm-4">
       <mat-form-field>
         <input matInput formControlName="email" placeholder="adres email">
-        <mat-error *ngIf="form.get('email').hasError('required')">pole jest wymagane</mat-error>
-        <mat-error *ngIf = "!form.get('email').hasError('required')">pole nie może mieć więcej niż 32 znaki</mat-error>
+        <mat-error *ngIf = "form.get('email').hasError('required')">pole jest wymagane</mat-error>
+        <mat-error *ngIf = "form.get('email').hasError('email')">email musi mieć odpowiedni format</mat-error>
+        <mat-error *ngIf = "form.get('email').hasError('maxlength')">pole nie może mieć więcej niż 32 znaki</mat-error>
       </mat-form-field>
     </div>
   </div>
@@ -38,8 +39,9 @@
     <div class="col-sm-4">
       <mat-form-field>
         <input matInput formControlName="telephon" placeholder="numer telefonu">
+        <mat-error *ngIf="form.get('telephon').hasError('pattern')">numer telefonu musi mieć 9 cyfr</mat-error>
         <mat-error *ngIf="form.get('telephon').hasError('required')">pole jest wymagane</mat-error>
-        <mat-error *ngIf = "!form.get('telephon').hasError('required')">pole nie może mieć więcej niż 12 znaki</mat-error>
+
       </mat-form-field>
     </div>
     <div class="col-sm-4">

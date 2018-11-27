@@ -25,8 +25,8 @@ export class FormContactComponent implements OnInit {
       alias: [Value.alias , { validators: [Validators.required, Validators.maxLength(24) ]}],
       first_name: [Value.first_name, { validators: [ Validators.required, Validators.maxLength(24) ]}],
       last_name: [Value.last_name, { validators: [ Validators.required, Validators.maxLength(24) ]}],
-      email: [Value.email, { validators: [ Validators.required, Validators.maxLength(32) ]}],
-      telephon: [Value.telephon, { validators: [ Validators.required, Validators.maxLength(12) ]}],
+      email: [Value.email, { validators: [ Validators.required, Validators.maxLength(32), Validators.email  ]}],
+      telephon: [Value.telephon, { validators: [ Validators.required, Validators.maxLength(12), Validators.pattern('[0-9]{9}') ]}],
       sex: [Value.sex, Validators.required]
     });
 }
