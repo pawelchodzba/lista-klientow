@@ -10,6 +10,7 @@ import { CoreModule } from '../app/core/core.module';
  import { ToastrModule } from 'ngx-toastr';
 import { ContactListService } from './contact-list/contact-list.service';
 import { HttpModule } from '@angular/http';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { HttpModule } from '@angular/http';
     MaterialModule,
     AppRoutingModule,
     HttpModule,
-    CoreModule
+    CoreModule,
+    DeviceDetectorModule.forRoot()
   ],
   providers: [
     ContactListService
