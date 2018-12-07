@@ -17,9 +17,13 @@ export class NewContactComponent  {
       private toastr: ToastrService
   ) { }
   createContact(alias: string): void {
-    this.contactListService.addPerson(this.formContact.form.value);
-    this.showSuccess('Klient ' + alias + '  został dodany do listy kontaktów');
-    this.reloadTab();
+   this.contactListService.addPerson(this.formContact.form.value).subscribe((data) => {
+      this.showSuccess('Klient ' + alias + '  został dodany do listy kontaktów');
+      this.reloadTab();
+   },
+    (error) => {console.log(error); } );
+
+
   }
   showSuccess(text: string): void {
     this.toastr.success(text);

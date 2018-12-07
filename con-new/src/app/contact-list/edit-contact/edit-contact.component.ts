@@ -3,6 +3,7 @@ import { ContactListService } from '../contact-list.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormContactComponent } from '../form-contact/form-contact.component';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 
@@ -14,9 +15,11 @@ import { ToastrService } from 'ngx-toastr';
 export class EditContactComponent implements OnInit, AfterViewInit {
    @ViewChild('formContact') formContact: FormContactComponent;
    Person;
+   Error;
   constructor(
     private contactListService: ContactListService,
     private route: ActivatedRoute,
+    private rout: Router,
     private toastr: ToastrService
   ) { }
   ngAfterViewInit() {
@@ -31,13 +34,20 @@ export class EditContactComponent implements OnInit, AfterViewInit {
       this.formContact.buildForm(this.formContact.setValueForm(person));
       this.Person = person;
       this.Person.id  = id;
-   });
+   },
+      (error) => {this.rout.navigate(['/', 'clients']);
+    });
   }
   updateContact(): void {
     const ValuesForm = this.formContact.form.value;
     ValuesForm.id = this.Person.id;
-    this.contactListService.upDataPerson(ValuesForm);
-    this.showSuccess('Dane Klienta  ' +  ValuesForm.alias + ' zotały zaktualizowane');
+    this.contactListService.upDataPerson(ValuesForm).subscribe((data) => {
+      this.showSuccess('Dane Klienta  ' +  ValuesForm.alias + ' zotały zaktualizowane');
+      this.reloadTab();
+    },
+    (error) => {console.log(error); }
+  );
+
   }
   reloadTab(): void {
     this.contactListService.reLoadTab();

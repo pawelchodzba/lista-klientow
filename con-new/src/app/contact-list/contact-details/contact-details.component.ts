@@ -9,7 +9,7 @@ import { Person } from '../../contact-list/models/person';
   styleUrls: ['./contact-details.component.css']
 })
 export class ContactDetailsComponent implements OnInit {
-  Person: Person;
+  Person;
   constructor(
     private contactListService: ContactListService,
     private route: ActivatedRoute
@@ -21,8 +21,10 @@ export class ContactDetailsComponent implements OnInit {
   loadContact(): void {
     const id = this.route.snapshot.params['id'];
     this.contactListService.getPerson(id).subscribe((person) => {
-     this.Person = person;
-    });
+      this.Person = person;
+    },
+    (error) => {console.log(error); }
+  );
 
   }
 }

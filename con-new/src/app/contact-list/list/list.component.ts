@@ -36,11 +36,16 @@ constructor(
     }
   }
   createDataSorce(): void {
-    this.contactListService.read().subscribe((persons) => {
-      this.dataSource = new MatTableDataSource(persons['records']);
+    this.contactListService.read().subscribe((Persons) => {
+      this.dataSource = new MatTableDataSource(Persons['records']);
       this.createPaginator();
-    });
+
+    },
+      (error) => {console.log(error); }
+    );
+
   }
+
   createPaginator(): MatPaginator {
     this.dataSource.paginator = this.paginator;
     return this.paginator;
@@ -59,15 +64,17 @@ constructor(
      this.toastr.success(text);
   }
   delete(Row): void {
-     const dialogRef = this.dialog.open(DialogDeleteComponent, {
-         data: {alias: Row.alias}
-     });
+    const dialogRef = this.dialog.open(DialogDeleteComponent, {
+      data: {alias: Row.alias}
+    });
     dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.contactListService.deletePerson(Row.id);
+      if (result) {
+        this.contactListService.deletePerson(Row).subscribe((data) => {
           this.showSuccess('client ' + Row.alias + '  został usunięty z listy kontaktów');
           this.refreshPage();
-        }
+        },
+        (error) => console.log(error));
+      }
     });
   }
   openNewContactModal(): void {
