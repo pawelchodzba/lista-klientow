@@ -21,7 +21,9 @@ export class NewContactComponent  {
       this.showSuccess('Klient ' + alias + '  został dodany do listy kontaktów');
       this.reloadTab();
    },
-    (error) => {console.log(error); } );
+    (error) => {
+      this.toastr.error(error, ' Bład');
+    } );
 
 
   }

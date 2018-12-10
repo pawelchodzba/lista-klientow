@@ -15,6 +15,7 @@ export class ListComponent implements OnInit {
 
 displayedColumns: string[] = ['alias', 'first_name', 'last_name', 'email', 'telephon', 'sex', 'details', 'edit', 'delete'];
 dataSource;
+error: string;
 
 @ViewChild(MatPaginator) paginator: MatPaginator;
 // @ViewChild(MatSort) sort: MatSort;??
@@ -41,7 +42,9 @@ constructor(
       this.createPaginator();
 
     },
-      (error) => {console.log(error); }
+      (error) => {
+        this.error = error;
+       }
     );
 
   }
@@ -73,7 +76,10 @@ constructor(
           this.showSuccess('client ' + Row.alias + '  został usunięty z listy kontaktów');
           this.refreshPage();
         },
-        (error) => console.log(error));
+        (error) => {
+          this.toastr.error(error, ' Bład');
+        }
+      );
       }
     });
   }

@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Person } from './models/person';
 import { Observable } from 'rxjs/Observable';
-// import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-// import { ListComponent  } from './list/list.component';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ToastrService } from 'ngx-toastr';
 import { HttpResponse } from '@angular/common/http';
@@ -12,7 +10,7 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { retry } from 'rxjs/internal/operators/retry';
-// import { ArrayType } from '@angular/compiler/src/output/output_ast';
+
 
 
 @Injectable({
@@ -36,18 +34,18 @@ export class ContactListService {
    ) {}
 
   addPerson(person: Person): Observable<any> {
-    // const phpUrl = 'http://localhost/contact-new/back-end/create.php';
-  const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
-  const phpUrl = prefixRoute + 'back-end/create.php';
+    const phpUrl = 'http://localhost/contact-new/back-end/create.php';
+  // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
+  // const phpUrl = prefixRoute + 'back-end/create.php';
     return  this.http.post(phpUrl, person, this.httpOptions)
     .pipe(
       catchError(this.handleError)
     );
  }
 read(): Observable<Person[]> {
-  // const phpUrl = 'http://localhost/contact-new/back-end/read.php';
-  const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
-  const phpUrl = prefixRoute + 'back-end/read.php';
+  const phpUrl = 'http://localhost/contact-new/back-end/read.php';
+  // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
+  // const phpUrl = prefixRoute + 'back-end/read.php';
   return this.http.get<Person[]>(phpUrl)
         .pipe(
           retry(3),
@@ -55,9 +53,9 @@ read(): Observable<Person[]> {
 
 }
 getPerson(id: string): Observable<any> {
-  // const phpUrl = 'http://localhost/contact-new/back-end/read_one.php?id=' + id;
- const prefixRoute = (this.detectBrowser() === 'chrome') ? '../../../' : '' ;
-  const phpUrl = prefixRoute + 'back-end/read_one.php?id=' + id;
+  const phpUrl = 'http://localhost/contact-new/back-end/read_one.php?id=' + id;
+//  const prefixRoute = (this.detectBrowser() === 'chrome') ? '../../../' : '' ;
+//   const phpUrl = prefixRoute + 'back-end/read_one.php?id=' + id;
   return this.http.get(phpUrl)
   .pipe(
     retry(3),
@@ -65,17 +63,17 @@ getPerson(id: string): Observable<any> {
 
 }
 upDataPerson(person): Observable<any> {
-  // const phpUrl = 'http://localhost/contact-new/back-end/update.php';
-  const prefixRoute = (this.detectBrowser() === 'chrome') ? '../../../' : '' ;
-  const phpUrl = prefixRoute + 'back-end/update.php';
+  const phpUrl = 'http://localhost/contact-new/back-end/update.php';
+  // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../../../' : '' ;
+  // const phpUrl = prefixRoute + 'back-end/update.php';
   return this.http.post(phpUrl, person, this.httpOptions)
   .pipe(
     catchError(this.handleError));
 }
 deletePerson(person): Observable<any> {
-  // const phpUrl = 'http://localhost/contact-new/back-end/delete.php';
-  const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
-  const phpUrl = prefixRoute + 'back-end/delete.php';
+  const phpUrl = 'http://localhost/contact-new/back-end/delete.php';
+  // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
+  // const phpUrl = prefixRoute + 'back-end/delete.php';
 
    return this.http.post(phpUrl, {id: person.id}, this.httpOptions)
     .pipe(

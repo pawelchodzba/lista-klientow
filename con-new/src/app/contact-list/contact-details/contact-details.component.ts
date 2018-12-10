@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ContactListService } from '../contact-list.service';
 import { ActivatedRoute } from '@angular/router';
 import { Person } from '../../contact-list/models/person';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contact-details',
@@ -12,7 +13,9 @@ export class ContactDetailsComponent implements OnInit {
   Person;
   constructor(
     private contactListService: ContactListService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService
+
   ) {}
 
   ngOnInit() {
@@ -23,7 +26,9 @@ export class ContactDetailsComponent implements OnInit {
     this.contactListService.getPerson(id).subscribe((person) => {
       this.Person = person;
     },
-    (error) => {console.log(error); }
+    (error) => {
+      this.toastr.error(error, ' Bład');
+     }
   );
 
   }

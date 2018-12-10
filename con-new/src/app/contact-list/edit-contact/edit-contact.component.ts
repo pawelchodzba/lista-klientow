@@ -35,7 +35,9 @@ export class EditContactComponent implements OnInit, AfterViewInit {
       this.Person = person;
       this.Person.id  = id;
    },
-      (error) => {this.rout.navigate(['/', 'clients']);
+      (error) => {
+        this.rout.navigate(['/', 'clients']);
+        this.toastr.error(error, ' Bład');
     });
   }
   updateContact(): void {
@@ -45,7 +47,9 @@ export class EditContactComponent implements OnInit, AfterViewInit {
       this.showSuccess('Dane Klienta  ' +  ValuesForm.alias + ' zotały zaktualizowane');
       this.reloadTab();
     },
-    (error) => {console.log(error); }
+    (error) => {
+      this.toastr.error(error, ' Bład');
+     }
   );
 
   }
