@@ -13,6 +13,7 @@ import { ContactListService } from './contact-list/contact-list.service';
 import { HttpClientModule } from '@angular/common/http';
 
 import { DeviceDetectorModule } from 'ngx-device-detector';
+import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -26,9 +27,9 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     ContactListModule,
     MaterialModule,
     AppRoutingModule,
-    // HttpModule,
     HttpClientModule,
     CoreModule,
+    ScrollDispatchModule,
     DeviceDetectorModule.forRoot()
   ],
   providers: [

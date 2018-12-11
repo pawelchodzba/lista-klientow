@@ -15,7 +15,8 @@ import {
         MatListModule,
         MatPaginator,
         MatPaginatorModule,
-        MatMenuModule
+        MatMenuModule,
+        MatSidenavModule
 } from '@angular/material';
 const MAT_DIALOG_GLOBAL_CONFIG: MatDialogConfig = {
   width: '600px',
@@ -36,7 +37,8 @@ const MATERIAL_MODULES = [
         MatTableModule,
         MatListModule,
         MatPaginatorModule,
-        MatMenuModule
+        MatMenuModule,
+        MatSidenavModule
 ];
 
 @NgModule({

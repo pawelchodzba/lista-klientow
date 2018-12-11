@@ -2,8 +2,8 @@
 <div  *ngIf="error" class="alert alert-danger pt-5 mt-5" role="alert">
   {{error}}
 </div>
-<div *ngIf="!error" class="ghost-top"></div>
-<div class="table-all">
+<div  class="ghost-top"></div>
+<div *ngIf="!error" class="table-all">
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
 
