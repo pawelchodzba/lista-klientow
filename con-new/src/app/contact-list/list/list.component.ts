@@ -6,6 +6,7 @@ import { DialogDeleteComponent } from '../../shared/dialog-delete/dialog-delete.
 import { ToastrService } from 'ngx-toastr';
 import { Person } from '../models/person';
 
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -14,21 +15,19 @@ import { Person } from '../models/person';
 export class ListComponent implements OnInit {
 
 displayedColumns: string[] = ['alias', 'first_name', 'last_name', 'email', 'telephon', 'sex', 'details', 'edit', 'delete'];
-dataSource;
+dataSource: MatTableDataSource<Person>;
 error: string;
-
 @ViewChild(MatPaginator) paginator: MatPaginator;
-// @ViewChild(MatSort) sort: MatSort;??
+@ViewChild(MatSort) sort: MatSort;
 constructor(
   private contactListService: ContactListService,
   private dialog: MatDialog,
   private toastr: ToastrService
 
-) {}
-
+) { }
   ngOnInit() {
-    this.createDataSorce();
     this.giveItToServiceContext();
+    this.createDataSorce();
   }
   applyFilter(filterValue: string): void {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -39,26 +38,21 @@ constructor(
   createDataSorce(): void {
     this.contactListService.read().subscribe((Persons) => {
       this.dataSource = new MatTableDataSource(Persons['records']);
+      this.dataSource.sort = this.sort;
       this.createPaginator();
-
     },
       (error) => {
         this.error = error;
        }
     );
-
   }
-
   createPaginator(): MatPaginator {
     this.dataSource.paginator = this.paginator;
     return this.paginator;
   }
   refreshPage(): void {
-    this.createDataSorce(); // kolejnoć !!!
+    this.createDataSorce();
     this.createPaginator().firstPage();
-  }
-  createSort(): void {
-   // this.dataSource.sort = this.sort;
   }
   giveItToServiceContext(): void {
     this.contactListService.fowardRefTab(this);

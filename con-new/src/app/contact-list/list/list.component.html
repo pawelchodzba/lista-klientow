@@ -5,14 +5,14 @@
 <div  class="ghost-top"></div>
 <div *ngIf="!error" class="table-all">
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table matSort mat-table [dataSource]="dataSource"  matSortActive="first_name" matSortDirection="asc" matSortDisableClear>
 
       <!-- alias -->
       <ng-container matColumnDef="alias">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Pseudonim </th>
         <td mat-cell *matCellDef="let row"> {{row.alias}} </td>
       </ng-container>
-      <!-- firs_name -->
+      <!-- first_name -->
       <ng-container matColumnDef="first_name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Imię </th>
         <td mat-cell *matCellDef="let row"> {{row.first_name}}</td>
@@ -42,21 +42,21 @@
       </ng-container>
       <!-- details -->
       <ng-container matColumnDef="details">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <th mat-header-cell *matHeaderCellDef ></th>
         <td mat-cell *matCellDef="let row" [style.color]="row.color">
           <button mat-raised-button [routerLink] = "['details', row.id]">Szczegóły</button>
         </td>
       </ng-container>
       <!-- edit -->
       <ng-container matColumnDef="edit">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <th mat-header-cell *matHeaderCellDef ></th>
         <td mat-cell *matCellDef="let row" [style.color]="row.color">
           <button  mat-raised-button [routerLink] = "['edit', row.id]">Edycja</button>
         </td>
       </ng-container>
       <!-- delete -->
       <ng-container matColumnDef="delete">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <th mat-header-cell *matHeaderCellDef ></th>
         <td mat-cell *matCellDef="let row" [style.color]="row.color">
           <button mat-stroked-button color="warn"  (click)="delete(row)" [routerLink] = "['']">Usuń</button>
         </td>
