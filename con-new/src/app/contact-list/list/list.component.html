@@ -2,6 +2,7 @@
 <div  *ngIf="error" class="alert alert-danger pt-5 mt-5" role="alert">
   {{error}}
 </div>
+<!-- <app-spiner  ></app-spiner> -->
 <div  class="ghost-top"></div>
 <div *ngIf="!error" class="table-all">
   <div class="mat-elevation-z8">
@@ -85,5 +86,6 @@
   <mat-paginator [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
 </div>
 </div>
-
+<!-- <app-spiner></app-spiner> -->
+<ng-template #spiner></ng-template>
 <router-outlet></router-outlet>

@@ -7,13 +7,13 @@ import { ContactListModule } from './contact-list/contact-list.module';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing-module';
 import { CoreModule } from '../app/core/core.module';
- import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { ContactListService } from './contact-list/contact-list.service';
-// import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import {ScrollDispatchModule} from '@angular/cdk/scrolling';
+import { SpinerComponent } from './shared/spiner/spiner.component';
 
 
 @NgModule({
@@ -31,10 +31,11 @@ import {ScrollDispatchModule} from '@angular/cdk/scrolling';
     CoreModule,
     ScrollDispatchModule,
     DeviceDetectorModule.forRoot()
+
   ],
   providers: [
-    ContactListService
+    ContactListService, SpinerComponent
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

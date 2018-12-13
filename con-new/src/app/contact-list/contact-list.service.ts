@@ -1,17 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Person } from './models/person';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ToastrService } from 'ngx-toastr';
 import { HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/internal/operators/catchError';
-import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { retry } from 'rxjs/internal/operators/retry';
-
-
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +17,10 @@ export class ContactListService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/x-www-form-urlencoded; charset=UTF-8'
-
     })
   };
 
-  private prefixroutes: string;
-
+ private prefixroutes: string;
  constructor(
    private http: HttpClient,
    private divaceDetector: DeviceDetectorService,
