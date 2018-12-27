@@ -11,6 +11,7 @@ Class Clients
     public $email;
     public $telephon;
     public $sex;
+    public $photo;
     
     private $arrInput;
   
@@ -27,7 +28,7 @@ Class Clients
     }
     public function create()
     {
-        $sql = "INSERT INTO " . $this->tab_name. " SET alias=:alias, first_name=:first_name, last_name=:last_name, email=:email, telephon=:telephon, sex=:sex";
+        $sql = "INSERT INTO " . $this->tab_name. " SET alias=:alias, first_name=:first_name, last_name=:last_name, email=:email, telephon=:telephon, sex=:sex, photo=:photo";
         return $this->connection->prepare($sql);
  
     }
@@ -41,7 +42,7 @@ Class Clients
     }
     public function update()
     {   
-        $sql = "UPDATE ".$this->tab_name. " SET alias=:alias, first_name=:first_name, last_name=:last_name, email=:email, telephon=:telephon, sex=:sex WHERE id=:id";
+        $sql = "UPDATE ".$this->tab_name. " SET alias=:alias, first_name=:first_name, last_name=:last_name, email=:email, telephon=:telephon, sex=:sex, photo=:photo WHERE id=:id";
         return $this->connection->prepare($sql);
     }
     public function delete()
@@ -49,7 +50,7 @@ Class Clients
         $sql = "DELETE FROM ".$this->tab_name." WHERE id = ?";
         $stmt = $this->connection->prepare($sql);
         $stmt->bindParam(1, $this->id);
-        return $this->exe($stmt) ? true : null;
+        return $this->exe($stmt) ? $stmt : null;
    
     }
     public function keyProperties()           
@@ -59,13 +60,13 @@ Class Clients
     public function message($arr,$statusCode)
     {
         http_response_code($statusCode); 
-        return print_r(json_encode($arr)); 
+        return  print_r(json_encode($arr)); 
     }
     public function setValueProperties($arrayAssoc)
     {
-        $keys = $this->keyProperties();
+        $keysProperties = $this->keyProperties();
         foreach ($arrayAssoc as $key => $value) {
-            if (in_array($key,$keys)) {
+            if (in_array($key,$keysProperties)) {
                 $this->{$key} = $value;
             }
         }
@@ -84,5 +85,10 @@ Class Clients
     {
         return  htmlspecialchars(strip_tags($valueProperty));
     }
+    public function notRequiredProerties()
+    {
+        return ["photo"];  
+    }
+        
         
 }

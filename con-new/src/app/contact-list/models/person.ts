@@ -7,4 +7,8 @@ export interface Person {
   email: string;
   telephon: string;
   sex: string;
+  photo: string;
+}
+export interface FileAlert {
+  valid: string;
 }

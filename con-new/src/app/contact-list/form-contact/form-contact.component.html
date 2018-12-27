@@ -16,7 +16,6 @@
       </mat-form-field>
     </div>
   </div>
-
   <div class="row" >
     <div class="col-sm-4">
       <mat-form-field>
@@ -52,8 +51,9 @@
           </mat-select>
           <mat-error *ngIf="form.get('sex').hasError('required')">pole jest wymagane</mat-error>
         </mat-form-field>
-    </div>
+      <button class="mb-3" mat-button mat-raised-button color = "primary" type="button" (click)="fileInput.click()">dodaj zdjęcie (max 700kb)</button>
+      <input  #fileInput  type="file" (change)="onFileSelected($event)" hidden>
+      </div>
   </div>
-
 </form>
 

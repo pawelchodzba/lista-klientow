@@ -18,7 +18,8 @@ include_once("save/chengeInput.php");
        
         $json = $Input->readInput('php://input');
         $this->id = $this->sanitization($json->id);
-        $this->delete();
+        $this->delete() ? $this->message(["message"=>"client został usunięty"],"200"):$this->message(["message"=>"client nie może być usunięty"],"500");
+
     }
          
  }

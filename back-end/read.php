@@ -21,9 +21,9 @@ class Read extends Clients
                 array_push($arrResult['records'], compact($keys));
             }
         }else{
-            $arrResult = $this->message(["message"=>"nomber of rows is null","400"]);
+            $arrResult = $this->message(["message"=>"nomber of rows is null"],"400");
         }
-        return $this->message($arrResult, '200');
+         $this->message($arrResult, '200');
     }
 }
 $database = new Database();

@@ -6,10 +6,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { SpinerComponent } from '../../shared/spiner/spiner.component';
 
-
-
-
-
 @Component({
   selector: 'app-edit-contact',
   templateUrl: './edit-contact.component.html',
