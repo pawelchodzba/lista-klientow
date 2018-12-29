@@ -29,27 +29,27 @@ export class ContactListService {
     ) {}
 
   addPerson(person): Observable<any> {
-    const phpUrl = 'http://localhost/contact-new/back-end/create.php';
-    // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
-    // const phpUrl = prefixRoute + 'back-end/create.php';
+    // const phpUrl = 'http://localhost/contact-new/back-end/create.php';
+    const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
+    const phpUrl = prefixRoute + 'back-end/create.php';
     return  this.http.post(phpUrl, person)
     .pipe(
       catchError(this.handleError)
     );
   }
   read(): Observable<Person[]> {
-    const phpUrl = 'http://localhost/contact-new/back-end/read.php';
-    // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
-    // const phpUrl = prefixRoute + 'back-end/read.php';
+    // const phpUrl = 'http://localhost/contact-new/back-end/read.php';
+    const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
+    const phpUrl = prefixRoute + 'back-end/read.php';
     return this.http.get<Person[]>(phpUrl)
       .pipe(
         retry(3),
         catchError(this.handleError));
   }
   getPerson(id: string): Observable<any> {
-    const phpUrl = 'http://localhost/contact-new/back-end/read_one.php?id=' + id;
-    // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../../../' : '' ;
-    // const phpUrl = prefixRoute + 'back-end/read_one.php?id=' + id;
+    // const phpUrl = 'http://localhost/contact-new/back-end/read_one.php?id=' + id;
+    const prefixRoute = (this.detectBrowser() === 'chrome') ? '../../../' : '' ;
+    const phpUrl = prefixRoute + 'back-end/read_one.php?id=' + id;
     return this.http.get(phpUrl)
       .pipe(
         retry(3),
@@ -57,18 +57,18 @@ export class ContactListService {
       );
   }
   upDataPerson(person): Observable<any> {
-    const phpUrl = 'http://localhost/contact-new/back-end/update.php';
-    // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../../../' : '' ;
-    // const phpUrl = prefixRoute + 'back-end/update.php';
+    // const phpUrl = 'http://localhost/contact-new/back-end/update.php';
+    const prefixRoute = (this.detectBrowser() === 'chrome') ? '../../../' : '' ;
+    const phpUrl = prefixRoute + 'back-end/update.php';
     return this.http.post(phpUrl, person, this.httpOptions)
       .pipe(
         catchError(this.handleError)
       );
 }
   deletePerson(person): Observable<any> {
-    const phpUrl = 'http://localhost/contact-new/back-end/delete.php';
-    // const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
-    // const phpUrl = prefixRoute + 'back-end/delete.php';
+    // const phpUrl = 'http://localhost/contact-new/back-end/delete.php';
+    const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
+    const phpUrl = prefixRoute + 'back-end/delete.php';
     return this.http.post(phpUrl, {id: person.id}, this.httpOptions)
       .pipe(
         catchError(this.handleError)

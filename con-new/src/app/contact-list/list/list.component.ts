@@ -1,6 +1,6 @@
 import { Component, OnInit,  ViewChild, ViewContainerRef } from '@angular/core';
 import { ContactListService } from './../contact-list.service';
-import { MatDialog, MatTableDataSource, MatTable, MatPaginator, MatSort} from '@angular/material';
+import { MatDialog, MatTableDataSource, MatTable, MatPaginator, MatSort, MatIconModule} from '@angular/material';
 import { NewContactComponent } from './../new-contact/new-contact.component';
 import { DialogDeleteComponent } from '../../shared/dialog-delete/dialog-delete.component';
 import { ToastrService } from 'ngx-toastr';
@@ -14,7 +14,7 @@ import { SpinerComponent } from '../../shared/spiner/spiner.component';
 })
 export class ListComponent implements OnInit {
 
-displayedColumns: string[] = ['alias', 'first_name', 'last_name', 'email', 'telephon', 'sex', 'details', 'edit', 'delete'];
+displayedColumns: string[] = ['alias', 'first_name', 'last_name', 'email', 'telephon', 'sex', 'photo', 'details', 'edit', 'delete'];
 dataSource: MatTableDataSource<Person>;
 error: string;
 @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -85,4 +85,5 @@ constructor(
   openNewContactModal(): void {
      const dialogRef = this.dialog.open(NewContactComponent);
   }
+
 }

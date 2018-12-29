@@ -4,15 +4,15 @@ import { ListComponent } from './contact-list/list/list.component';
 import { Route } from '@angular/router';
 import { ContactDetailsComponent } from './contact-list/contact-details/contact-details.component';
 import { EditContactComponent } from './contact-list/edit-contact/edit-contact.component';
+import { PhotoComponent } from './shared/photo/photo.component';
 
 const APP_ROUTES: Route[] = [
-  // { path: '', pathMatch : 'full', redirectTo: 'clients'},
   { path: '', redirectTo: 'clients', pathMatch: 'full' },
   { path: 'clients' , component: <any>ListComponent, children: [
       { path: 'details/:id', component: <any>ContactDetailsComponent},
       { path: 'edit/:id', component: <any>EditContactComponent},
   ]},
-  // { path: 'details/:id', redirectTo: '/aaaa', pathMatch: 'full' }
+  { path: 'clients/photo/:id', component: <any>PhotoComponent }
   // { path: 'details/:id' , component: <any>ContactDetailsComponent }
 ];
 @NgModule({
