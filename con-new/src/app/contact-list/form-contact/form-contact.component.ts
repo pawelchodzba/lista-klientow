@@ -44,7 +44,7 @@ buildForm(Value): void {
     email: [Value.email, { validators: [ Validators.required, Validators.maxLength(32), Validators.email  ]}],
     telephon: [Value.telephon, { validators: [ Validators.required, Validators.maxLength(12), Validators.pattern('[0-9]{9}') ]}],
     sex: [Value.sex, Validators.required],
-    photo:  ''
+    photo:  Value.photo
   });
 }
   setValueForm(Person) {
@@ -56,6 +56,7 @@ buildForm(Value): void {
         email: Person.email,
         telephon: Person.telephon,
         sex: Person.sex,
+        photo: Person.photo
       };
     } else {
       return {
@@ -65,6 +66,7 @@ buildForm(Value): void {
         email: '',
         telephon: '',
         sex: 'k',
+        photo: ''
       };
     }
   }
