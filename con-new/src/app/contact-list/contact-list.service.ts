@@ -3,11 +3,11 @@ import { Person } from './models/person';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { ToastrService } from 'ngx-toastr';
 import { HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { throwError } from 'rxjs';
 import { retry } from 'rxjs/internal/operators/retry';
+import { ArrayType } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -20,15 +20,12 @@ export class ContactListService {
       'Content-Type':  'application/x-www-form-urlencoded; charset=UTF-8'
     })
   };
-  private prefixroutes: string;
-
   constructor(
     private http: HttpClient,
-    private divaceDetector: DeviceDetectorService,
-    private toastr: ToastrService
+    private divaceDetector: DeviceDetectorService
     ) {}
 
-  addPerson(person): Observable<any> {
+  addPerson(person: Person): Observable<any> {
     // const phpUrl = 'http://localhost/contact-new/back-end/create.php';
     const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
     const phpUrl = prefixRoute + 'back-end/create.php';
@@ -56,7 +53,7 @@ export class ContactListService {
         catchError(this.handleError)
       );
   }
-  upDataPerson(person): Observable<any> {
+  upDataPerson(person: Person): Observable<object> {
     // const phpUrl = 'http://localhost/contact-new/back-end/update.php';
     const prefixRoute = (this.detectBrowser() === 'chrome') ? '../../../' : '' ;
     const phpUrl = prefixRoute + 'back-end/update.php';
@@ -65,7 +62,7 @@ export class ContactListService {
         catchError(this.handleError)
       );
 }
-  deletePerson(person): Observable<any> {
+  deletePerson(person: Person): Observable<object> {
     // const phpUrl = 'http://localhost/contact-new/back-end/delete.php';
     const prefixRoute = (this.detectBrowser() === 'chrome') ? '../' : '' ;
     const phpUrl = prefixRoute + 'back-end/delete.php';

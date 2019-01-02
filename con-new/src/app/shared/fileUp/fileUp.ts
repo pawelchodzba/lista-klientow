@@ -67,7 +67,7 @@ export class FileUp {
   }
    ///////////////////////// async   /////////////////
   private onLoad(): void {
-    this.reader.onload = () => {console.log('this.reader.result');
+    this.reader.onload = () => {
     this.fnToBeCalled();
     };
   }
