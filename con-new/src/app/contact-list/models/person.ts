@@ -1,6 +1,6 @@
 
 export interface Person {
-  id: number;
+  id: string;
   alias: string;
   first_name: string;
   last_name: string;
@@ -9,6 +9,4 @@ export interface Person {
   sex: string;
   photo: string;
 }
-export interface FileAlert {
-  valid: string;
-}
+
