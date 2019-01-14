@@ -6,7 +6,7 @@ import { ContactDetailsComponent } from './contact-list/contact-details/contact-
 import { EditContactComponent } from './contact-list/edit-contact/edit-contact.component';
 import { PhotoComponent } from './shared/photo/photo.component';
 
-const APP_ROUTES: Route[] = [
+export const APP_ROUTES: Route[] = [
   { path: '', redirectTo: 'clients', pathMatch: 'full' },
   { path: 'clients' , component: <any>ListComponent, children: [
       { path: 'details/:id', component: <any>ContactDetailsComponent},

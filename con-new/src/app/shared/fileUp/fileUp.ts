@@ -19,7 +19,7 @@ export class FileUp {
   };
   errors: FileAlert[] = [];
 
-  dataUrl(file: File): void {
+  dataUrl(file: File): void {//console.log(file);
     this.reader.readAsDataURL(file);
     this.setFile(file);
     this.errorsClear();
@@ -28,9 +28,13 @@ export class FileUp {
   }
   setObj(Context): void {
     this.Context = Context;
+
   }
   setRequiredPropFile(propertiesFile) {
     this.requirePropertiesFile = propertiesFile;
+  }
+  private setFile(file): void {
+    this.file = file;
   }
   private size(size: number): FileAlert {
     if (Number.isInteger(size)) {
@@ -48,9 +52,6 @@ export class FileUp {
        this.errors.push(this[key](this.requirePropertiesFile[key]));
       }
     }
-  }
-  private setFile(file): void {
-    this.file = file;
   }
   private checkErrors(): FileAlert[] {
     return this.errors.filter((valid) => {
