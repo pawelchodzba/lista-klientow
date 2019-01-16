@@ -89,10 +89,13 @@ export class ContactListService {
   fowardRefTab(ListContext): void {
     this.ListContext = ListContext;
   }
-  reLoadTab(): void {
+  reLoadTab(): void {this.test();
     this.ListContext.refreshPage();
   }
   detectBrowser(): string  {
     return this.divaceDetector.browser;
+  }
+  test() {
+    return true;
   }
 }
