@@ -14,7 +14,7 @@ import { SpinerComponent } from '../../shared/spiner/spiner.component';
 })
 export class ListComponent implements OnInit {
 
-displayedColumns: string[] = ['alias', 'first_name', 'last_name', 'email', 'telephon', 'sex', 'photo', 'details', 'edit', 'delete'];
+displayedColumns: string[] = ['Nazwa', 'Sala', 'Data', 'Email', 'Telephon', 'Description', 'Admin', 'details', 'edit', 'delete'];
 dataSource: MatTableDataSource<Person>;
 error: string;
 @ViewChild(MatPaginator) paginator: MatPaginator;
