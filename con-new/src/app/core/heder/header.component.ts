@@ -3,6 +3,11 @@ import {ScrollDispatcher} from '@angular/cdk/scrolling';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { map } from 'rxjs/operators';
 import { NgZone } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { LoginComponent } from '../../login/login.component';
+import { AuthService } from '../../auth/auth.service';
+
+
 
 @Component({
   selector: 'app-header',
@@ -13,9 +18,16 @@ export class HeaderComponent implements OnInit  {
 
   private readonly SHRINK_TOP_SCROLL_POSITION = 0;
   shrinkToolbar = false;
+  viewToolbar = true;
+  isLoged = false;
+  logName: string;
+  constructor(
+    private scrollDispatcher: ScrollDispatcher,
+    private ngZone: NgZone,
+    public dialog: MatDialog,
+    private authService: AuthService
 
-  constructor(private scrollDispatcher: ScrollDispatcher,
-    private ngZone: NgZone) { }
+  ) { }
 
   ngOnInit() {
     this.scrollDispatcher.scrolled()
@@ -30,7 +42,27 @@ export class HeaderComponent implements OnInit  {
       return window.scrollY;
     }
   }
+  openDialog() {
+    const dialogRef = this.dialog.open(LoginComponent);
+    dialogRef.afterOpen().subscribe(() => {
+      this.viewToolbar = false;
 
-
-
+   });
+    dialogRef.afterClosed().subscribe(() => {
+      this.viewToolbar = true;
+      this.isLoged = this.checkLog();
+      this.getNameLogin();
+   });
+  }
+  logOut() {
+    this.authService.logOut();
+    this.isLoged = this.checkLog();
+    this.getNameLogin();
+  }
+  checkLog() {
+    return this.authService.userLoged();
+  }
+  getNameLogin() {
+    this.logName =  this.authService.getLogName();
+  }
 }

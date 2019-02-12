@@ -8,5 +8,8 @@
 
 .shrink-toolbar {
   display: none;
-   /* height: 5px; */
+
+}
+.log{
+  font-size: 14px;
 }

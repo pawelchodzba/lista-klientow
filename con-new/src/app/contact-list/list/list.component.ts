@@ -6,6 +6,8 @@ import { DialogDeleteComponent } from '../../shared/dialog-delete/dialog-delete.
 import { ToastrService } from 'ngx-toastr';
 import { Person } from '../models/person';
 import { SpinerComponent } from '../../shared/spiner/spiner.component';
+import { LayoutService } from '../../shared/services/layout.service';
+
 
 @Component({
   selector: 'app-list',
@@ -20,16 +22,20 @@ error: string;
 @ViewChild(MatPaginator) paginator: MatPaginator;
 @ViewChild(MatSort) sort: MatSort;
 @ViewChild('spiner', {read: ViewContainerRef}) spiner: ViewContainerRef;
-
+disabled = true;
 constructor(
   private contactListService: ContactListService,
   private dialog: MatDialog,
   private toastr: ToastrService,
-  private spinerComponent: SpinerComponent
+  private spinerComponent: SpinerComponent,
+  private layoutService: LayoutService
 ) { }
   ngOnInit() {
     this.giveItToServiceContext();
     this.createDataSorce();
+    this.layoutService.logedOrNoneSorce.subscribe((possible) => {
+      this.disabled = !possible;
+    });
   }
   applyFilter(filterValue: string): void {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -85,5 +91,4 @@ constructor(
   openNewContactModal(): void {
      const dialogRef = this.dialog.open(NewContactComponent);
   }
-
 }

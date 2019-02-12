@@ -12,8 +12,11 @@ import { ContactListService } from './contact-list/contact-list.service';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { DeviceDetectorModule } from 'ngx-device-detector';
-import {ScrollDispatchModule} from '@angular/cdk/scrolling';
+import { ScrollDispatchModule} from '@angular/cdk/scrolling';
 import { SpinerComponent } from './shared/spiner/spiner.component';
+import { LoginModule } from './login/login.module';
+import { AuthService } from './auth/auth.service';
+import { LayoutService } from './shared/services/layout.service';
 
 
 @NgModule({
@@ -30,11 +33,13 @@ import { SpinerComponent } from './shared/spiner/spiner.component';
     HttpClientModule,
     CoreModule,
     ScrollDispatchModule,
+    LoginModule,
     DeviceDetectorModule.forRoot()
+
 
   ],
   providers: [
-    ContactListService, SpinerComponent
+    ContactListService, SpinerComponent, AuthService, LayoutService
   ],
   bootstrap: [AppComponent]
 })

@@ -9,6 +9,7 @@ import { ContactDetailsComponent } from './contact-details/contact-details.compo
 import { RouterModule } from '@angular/router';
 import { EditContactComponent } from './edit-contact/edit-contact.component';
 import { SharedModule } from '../shared/shared.module';
+
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // import { ContactListRoutingModule } from '../contact-list/contact-list-routing-module';
 
@@ -31,6 +32,6 @@ import { SharedModule } from '../shared/shared.module';
     FormContactComponent,
     ContactDetailsComponent,
     EditContactComponent
-  ]
+    ]
 })
 export class ContactListModule { }
