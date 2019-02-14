@@ -12,8 +12,8 @@ export class AuthService {
   };
   private isUserLoggedIn = false;
   constructor(private layoutService: LayoutService) {}
-
-  login(login, password) {
+///////////////////// fake method//////////////
+  login(login: string, password: string) {
     return new Promise((resolve, reject) => {
       if (login === this.credential.login && password === this.credential.password) {
         this.isUserLoggedIn = true;

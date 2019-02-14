@@ -1,7 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoginComponent } from './login.component';
+import { AuthServiceMock } from '../spec-helpers/AuthServiceMock';
+import { ToastrServiceMock } from '../spec-helpers/ToastrServiceMock';
+import { MatDialogMock } from '../spec-helpers/MatDialogMock';
 
-import { MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+
+import { MatDialog} from '@angular/material';
 import { AuthService } from '../auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { MaterialModule } from '../material/material.module';
@@ -29,9 +33,10 @@ let fixture: ComponentFixture<LoginComponent>;
     toastrService = TestBed.get(ToastrService);
     loginComponent = TestBed.get(LoginComponent);
     matDialog = TestBed.get(MatDialog);
-    fixture = TestBed.createComponent(LoginComponent);
+    // fixture = TestBed.createComponent(LoginComponent);
 
   });
+
   it('sholud create', () => {
     expect(loginComponent).toBeDefined();
   });
@@ -61,17 +66,17 @@ let fixture: ComponentFixture<LoginComponent>;
   });
 });
 
-class ToastrServiceMock {
+// class ToastrServiceMock {
 
-  error() {}
-}
-class AuthServiceMock {
-  login() {
+//   error() {}
+// }
+// class AuthServiceMock {
+//   login() {
 
-  }
-}
-class MatDialogMock {
-  ngOnDestroy() {
+//   }
+// }
+// class MatDialogMock {
+//   ngOnDestroy() {
 
-  }
-}
+//   }
+// }
