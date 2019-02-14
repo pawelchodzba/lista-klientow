@@ -46,7 +46,6 @@ export class HeaderComponent implements OnInit  {
     const dialogRef = this.dialog.open(LoginComponent);
     dialogRef.afterOpen().subscribe(() => {
       this.viewToolbar = false;
-
    });
     dialogRef.afterClosed().subscribe(() => {
       this.viewToolbar = true;
