@@ -17,62 +17,7 @@ import { fakeAsync } from '@angular/core/testing';
 import { async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { tick } from '@angular/core/testing';
-
-
-
-// describe('List', () => {
-
-// let component: ListComponent;
-// let contactListService: ContactListService;
-// let spinerComponent: SpinerComponent;
-// beforeEach(() => {
-//   TestBed.configureTestingModule({
-//     declarations: [ListComponent],
-//     imports: [MaterialModule,
-//       FormsModule,
-//       ReactiveFormsModule,
-//       RouterModule,
-//       SharedModule
-
-//       ],
-//       providers: [
-//         ListComponent,
-//       {provide: ContactListService, useClass: ContactListServiceMock },
-//       {provide: ToastrService, useClass: ToastrServiceMock },
-//       {provide: SpinerComponent, useClass: SpinerMock }
-//       ]
-//   });
-//   component = TestBed.get(ListComponent);
-//   contactListService = TestBed.get(ContactListService);
-//   spinerComponent = TestBed.get(SpinerComponent);
-// });
-//   it('component exist', () => {
-//     expect(component).toBeDefined();
-//   });
-//   it('start error is undefined ', () => {
-//     expect(component.error).toBeUndefined();
-//   });
-//   it('property displayedColumns must be array ', () => {
-//     expect(Array.isArray(component.displayedColumns)).toBeTruthy();
-//   });
-//   it('start dataSource is undefined ', () => {
-//     expect(component.dataSource).toBeUndefined();
-//   });
-//   it('start dataSource is undefined ', () => {
-//     expect(component.disabled).toBeTruthy();
-//   });
-//   it('start reference sort is undefined ', () => {
-//     expect(component.sort).toBeUndefined();
-//   });
-//   it('start reference paginator is undefined ', () => {
-//     expect(component.paginator).toBeUndefined();
-//   });
-//   it('start reference spiner is undefined ', () => {
-//     expect(component.spiner).toBeUndefined();
-//   });
-
-// });
+import { SpecTable } from '../../spec-helpers/SpecTable';
 
 describe('allTable', () => {
   beforeEach(async(() => {
@@ -115,34 +60,39 @@ describe('allTable', () => {
           contactListService = TestBed.get(ContactListService);
           spinerComponent = TestBed.get(SpinerComponent);
         }));
-
-
-        it('tablexxxx', () => {
-
-          // expectTableToMatchContent(tableElement, [
-          //   ['alias', 'first_name', 'last_name', 'email', 'telephon', 'sex', 'photo', 'details', 'edit', 'delete']
-          // ]);
+        it('component exist', () => {
+          expect(component).toBeDefined();
         });
-      });
+        it('start error is undefined ', () => {
+          expect(component.error).toBeUndefined();
+        });
+        it('property displayedColumns must be array ', () => {
+          expect(Array.isArray(component.displayedColumns)).toBeTruthy();
+        });
+        it('start dataSource is created ', () => {
+          expect(component.dataSource ).toBeDefined();
+        });
+        it('start property disabled is true ', () => {
+          expect(component.disabled).toBeTruthy();
+        });
+        it('start reference sort is created ', () => {
+          expect(component.sort).toBeDefined();
+        });
+        it('start reference paginator is created ', () => {
+          expect(component.paginator).toBeDefined();
+        });
+        it('start reference spiner is created ', () => {
+          expect(component.spiner).toBeDefined();
+        });
+        it('should create table end display table header mock record ', () => {
+          const HEADER_TEXT = ['Pseudonim',  'Imię', 'Nazwisko', 'Adres email', 'Telefon', 'Płeć',  'Photo'];
+          const specT = new SpecTable( tableElement, HEADER_TEXT);
+        });
+  });
 
 
 
 
 });
+//////////// function getActualTableContent //////////////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-function expectTableToMatchContent (tableElement: Element, expected: any[]) {
-
-  const missedExpectation: string[] = [];
-
-  function checkCellContent(actualCell: string, expectedCell: string) {
-    if (actualCell !== expectedCell) {
-      missedExpectation.push(`Expected cell contents to be ${expectedCell} but was ${actualCell}`);
-    }
-
-  }
-}
