@@ -51,16 +51,13 @@ describe('allTable', () => {
         let spinerComponent: SpinerComponent;
         beforeEach(fakeAsync(() => {
           fixture = TestBed.createComponent(ListComponent);
-
-          fixture.detectChanges();
-          // tick(1000);
-          tableElement = fixture.nativeElement.querySelector('.mat-table');
           component = fixture.componentInstance;
           dataSource = fixture.componentInstance.dataSource;
           contactListService = TestBed.get(ContactListService);
           spinerComponent = TestBed.get(SpinerComponent);
         }));
         it('component exist', () => {
+          fixture.detectChanges();
           expect(component).toBeDefined();
         });
         it('start error is undefined ', () => {
@@ -69,22 +66,37 @@ describe('allTable', () => {
         it('property displayedColumns must be array ', () => {
           expect(Array.isArray(component.displayedColumns)).toBeTruthy();
         });
-        it('start dataSource is created ', () => {
+        it('if component compailed dataSource is created ', () => {
+          fixture.detectChanges();
           expect(component.dataSource ).toBeDefined();
+        });
+        it('start dataSource is undefined ', () => {
+          expect(component.dataSource ).toBeUndefined();
         });
         it('start property disabled is true ', () => {
           expect(component.disabled).toBeTruthy();
         });
-        it('start reference sort is created ', () => {
+        it('start property sort is undefined ', () => {
+           expect(component.sort).toBeUndefined();
+        });
+        it('if component compailed property sort is created ', () => {
+          fixture.detectChanges();
           expect(component.sort).toBeDefined();
         });
-        it('start reference paginator is created ', () => {
+        it('start reference paginator is undefined ', () => {
+          expect(component.paginator).toBeUndefined();
+        });
+        it('if component compailed property paginator is created ', () => {
+          fixture.detectChanges();
           expect(component.paginator).toBeDefined();
         });
-        it('start reference spiner is created ', () => {
+        it('if component compailed component spiner is created ', () => {
+          fixture.detectChanges();
           expect(component.spiner).toBeDefined();
         });
         it('should create table end display table header mock record ', () => {
+          fixture.detectChanges();
+          tableElement = fixture.nativeElement.querySelector('.mat-table');
           const HEADER_TEXT = ['Pseudonim',  'Imię', 'Nazwisko', 'Adres email', 'Telefon', 'Płeć',  'Photo'];
           const specT = new SpecTable( tableElement, HEADER_TEXT);
         });
