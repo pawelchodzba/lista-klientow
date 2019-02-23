@@ -8,7 +8,7 @@
   <div class="mat-elevation-z8">
     <table matSort mat-table [dataSource]="dataSource"  matSortActive="first_name" matSortDirection="asc" matSortDisableClear>
 
-      <!-- alias -->
+
       <ng-container matColumnDef="alias">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Pseudonim </th>
         <td mat-cell *matCellDef="let row"> {{row.alias}} </td>
