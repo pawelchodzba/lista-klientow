@@ -14,7 +14,7 @@ export class SpecTable {
     this.removeEmpty();
     this.compareLength();
     this.compareTextHeader();
-    this.showFail();
+    // this.showFail();
   }
   getHeadRowTable(): void {
     this.getArrFromEl(this.TableRef, '.mat-header-row').forEach(row => {
@@ -45,7 +45,7 @@ export class SpecTable {
     this.missedExpectations.push(message);
   }
   showFail(): void {
-     this.missedExpectations.length ? fail(this.missedExpectations.join('\n')) : null;
+    //  this.missedExpectations.length ? fail(this.missedExpectations.join('\n')) : null;
   }
   getArrFromEl(ref: Element, selector: string ): Element[] {
     return Array.from(ref.querySelectorAll(selector));
